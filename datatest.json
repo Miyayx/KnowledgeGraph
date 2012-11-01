@@ -1,61 +1,61 @@
 {
 	"name": "flare",
-		"kinds":[
+		"children":[
 		{"kind":"A",
 			"children": [
-			{"name": "AgglomerativeCluster", "size": 3938,"imageurl":"picture/1.jpeg","directed":"true"},
-			{"name": "CommunityStructure", "size": 3812,"imageurl":"picture/2.jpeg","directed":"true"},
-			{"name": "HierarchicalCluster", "size": 6714,"imageurl":"picture/3.jpeg","directed":"true"},
-			{"name": "MergeEdge", "size": 743,"imageurl":"picture/4.jpeg","directed":"true"},
-			{"name": "BetweennessCentrality", "size": 3534,"imageurl":"picture/5.jpeg","directed":"true"},
-			{"name": "LinkDistance", "size": 5731,"imageurl":"picture/6.jpeg","directed":"false"},
-			{"name": "MaxFlowMinCut", "size": 7840,"imageurl":"picture/7.jpeg","directed":"true"},
-			{"name": "ShortestPaths", "size": 5914,"imageurl":"picture/8.jpeg","directed":"false"},
-			{"name": "SpanningTree", "size": 3416,"imageurl":"picture/9.jpeg","directed":"false"}
+			{"name": "AgglomerativeCluster", "size": 3938,"imageurl":"../picture/1.jpeg","directed":"true"},
+			{"name": "CommunityStructure", "size": 3812,"imageurl":"../picture/2.jpeg","directed":"true"},
+			{"name": "HierarchicalCluster", "size": 6714,"imageurl":"../picture/3.jpeg","directed":"true"},
+			{"name": "MergeEdge", "size": 743,"imageurl":"../picture/4.jpeg","directed":"true"},
+			{"name": "BetweennessCentrality", "size": 3534,"imageurl":"../picture/5.jpeg","directed":"true"},
+			{"name": "LinkDistance", "size": 5731,"imageurl":"../picture/6.jpeg","directed":"false"},
+			{"name": "MaxFlowMinCut", "size": 7840,"imageurl":"../picture/7.jpeg","directed":"true"},
+			{"name": "ShortestPaths", "size": 5914,"imageurl":"../picture/8.jpeg","directed":"false"},
+			{"name": "SpanningTree", "size": 3416,"imageurl":"../picture/9.jpeg","directed":"false"}
 			]
 		},
 		{"kind":"B",
 			"children": [
-			{"name": "AgglomerativeCluster", "size": 3938,"imageurl":"picture/10.jpeg","directed":"true"},
-			{"name": "CommunityStructure", "size": 3812,"imageurl":"picture/11.jpeg","directed":"true"},
-			{"name": "HierarchicalCluster", "size": 6714,"imageurl":"picture/12.jpeg","directed":"true"},
-			{"name": "MergeEdge", "size": 743,"imageurl":"picture/13.jpeg","directed":"true"},
-			{"name": "BetweennessCentrality", "size": 3534,"imageurl":"picture/14.jpeg","directed":"true"},
-			{"name": "LinkDistance", "size": 5731,"imageurl":"picture/15.jpeg","directed":"true"},
-			{"name": "MaxFlowMinCut", "size": 7840,"imageurl":"picture/16.jpeg","directed":"true"},
-			{"name": "ShortestPaths", "size": 5914,"imageurl":"picture/17.jpeg","directed":"true"},
-			{"name": "SpanningTree", "size": 3416,"imageurl":"picture/18.jpeg","directed":"true"},
-			{"name": "AspectRatioBanker", "size": 7074,"imageurl":"picture/19.jpeg","directed":"false"}
+			{"name": "AgglomerativeCluster", "size": 3938,"imageurl":"../picture/10.jpeg","directed":"true"},
+			{"name": "CommunityStructure", "size": 3812,"imageurl":"../picture/11.jpeg","directed":"true"},
+			{"name": "HierarchicalCluster", "size": 6714,"imageurl":"../picture/12.jpeg","directed":"true"},
+			{"name": "MergeEdge", "size": 743,"imageurl":"../picture/13.jpeg","directed":"true"},
+			{"name": "BetweennessCentrality", "size": 3534,"imageurl":"../picture/14.jpeg","directed":"true"},
+			{"name": "LinkDistance", "size": 5731,"imageurl":"../picture/15.jpeg","directed":"true"},
+			{"name": "MaxFlowMinCut", "size": 7840,"imageurl":"../picture/16.jpeg","directed":"true"},
+			{"name": "ShortestPaths", "size": 5914,"imageurl":"../picture/17.jpeg","directed":"true"},
+			{"name": "SpanningTree", "size": 3416,"imageurl":"../picture/18.jpeg","directed":"true"},
+			{"name": "AspectRatioBanker", "size": 7074,"imageurl":"../picture/19.jpeg","directed":"false"}
 			]
 		},
 		{"kind":"C",
 			"children":[
-			{"name": "FlareVis", "size": 4116,"imageurl":"picture/20.jpeg","directed":"true"},
-			{"name": "DragForce", "size": 1082,"imageurl":"picture/21.jpeg","directed":"true"},
-			{"name": "GravityForce", "size": 1336,"imageurl":"picture/22.jpeg","directed":"false"},
-			{"name": "Particle", "size": 2822,"imageurl":"picture/23.jpeg","directed":"false"},
-			{"name": "Simulation", "size": 9983,"imageurl":"picture/24.jpeg","directed":"true"},
-			{"name": "Spring", "size": 2213,"imageurl":"picture/25.jpeg","directed":"true"},
-			{"name": "SpringForce", "size": 1681,"imageurl":"picture/26.jpeg","directed":"true"},
-			{"name": "IScaleMap", "size": 2105,"imageurl":"picture/27.jpeg","directed":"false"},
-			{"name": "LinearScale", "size": 1316,"imageurl":"picture/28.jpeg","directed":"true"},
-			{"name": "RootScale", "size": 1756,"imageurl":"picture/29.jpeg","directed":"true"},
-			{"name": "Scale", "size": 4268,"imageurl":"picture/30.jpeg","directed":"true"},
-			{"name": "ScaleType", "size": 1821,"imageurl":"picture/31.jpeg","directed":"true"},
-			{"name": "TimeScale", "size": 5833,"imageurl":"picture/32.jpeg","directed":"false"}
+			{"name": "FlareVis", "size": 4116,"imageurl":"../picture/20.jpeg","directed":"true"},
+			{"name": "DragForce", "size": 1082,"imageurl":"../picture/21.jpeg","directed":"true"},
+			{"name": "GravityForce", "size": 1336,"imageurl":"../picture/22.jpeg","directed":"false"},
+			{"name": "Particle", "size": 2822,"imageurl":"../picture/23.jpeg","directed":"false"},
+			{"name": "Simulation", "size": 9983,"imageurl":"../picture/24.jpeg","directed":"true"},
+			{"name": "Spring", "size": 2213,"imageurl":"../picture/25.jpeg","directed":"true"},
+			{"name": "SpringForce", "size": 1681,"imageurl":"../picture/26.jpeg","directed":"true"},
+			{"name": "IScaleMap", "size": 2105,"imageurl":"../picture/27.jpeg","directed":"false"},
+			{"name": "LinearScale", "size": 1316,"imageurl":"../picture/28.jpeg","directed":"true"},
+			{"name": "RootScale", "size": 1756,"imageurl":"../picture/29.jpeg","directed":"true"},
+			{"name": "Scale", "size": 4268,"imageurl":"../picture/30.jpeg","directed":"true"},
+			{"name": "ScaleType", "size": 1821,"imageurl":"../picture/31.jpeg","directed":"true"},
+			{"name": "TimeScale", "size": 5833,"imageurl":"../picture/32.jpeg","directed":"false"}
 			]
 		},
 		{"kind":"D",
 			"children":[
-			{"name": "Axes", "size": 1302,"imageurl":"picture/33.jpeg","directed":"true"},
-			{"name": "Axis", "size": 24593,"imageurl":"picture/34.jpeg","directed":"false"},
-			{"name": "AxisGridLine", "size": 652,"imageurl":"picture/35.jpeg","directed":"true"},
-			{"name": "AxisLabel", "size": 636,"imageurl":"picture/36.jpeg","directed":"true"},
-			{"name": "CartesianAxes", "size": 6703,"imageurl":"picture/37.jpeg","directed":"false"},
-			{"name": "AnchorControl", "size": 2138,"imageurl":"picture/38.jpeg","directed":"true"},
-			{"name": "ClickControl", "size": 3824,"imageurl":"picture/39.jpeg","directed":"false"},
-			{"name": "Control", "size": 1353,"imageurl":"picture/40.jpeg","directed":"true"},
-			{"name": "ControlList", "size": 4665,"imageurl":"picture/41.jpeg","directed":"false"}
+			{"name": "Axes", "size": 1302,"imageurl":"../picture/33.jpeg","directed":"true"},
+			{"name": "Axis", "size": 24593,"imageurl":"../picture/34.jpeg","directed":"false"},
+			{"name": "AxisGridLine", "size": 652,"imageurl":"../picture/35.jpeg","directed":"true"},
+			{"name": "AxisLabel", "size": 636,"imageurl":"../picture/36.jpeg","directed":"true"},
+			{"name": "CartesianAxes", "size": 6703,"imageurl":"../picture/37.jpeg","directed":"false"},
+			{"name": "AnchorControl", "size": 2138,"imageurl":"../picture/38.jpeg","directed":"true"},
+			{"name": "ClickControl", "size": 3824,"imageurl":"../picture/39.jpeg","directed":"false"},
+			{"name": "Control", "size": 1353,"imageurl":"../picture/40.jpeg","directed":"true"},
+			{"name": "ControlList", "size": 4665,"imageurl":"../picture/41.jpeg","directed":"false"}
 			]
 		}
 	]

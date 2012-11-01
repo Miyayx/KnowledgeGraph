@@ -1,0 +1,6 @@
+n = 1
+for i in 'ls';
+do mv $i $n;
+n=$((n+1));
+done
+

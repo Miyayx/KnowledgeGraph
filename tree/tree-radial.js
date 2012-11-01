@@ -3,7 +3,7 @@ var radius = 960/ 2;
 	var tree = d3.layout.tree()
 .size([360, radius - 120])
 	.separation(function(a, b) { return (a.parent == b.parent ? 1 : 2) / a.depth; })
-	.children(function(d){return d.kinds});
+	.children(function(d){return d.children});
 
 var diagonal = d3.svg.diagonal.radial()
 	.projection(function(d) { return [d.y,d.x / 180 * Math.PI]; });
@@ -51,16 +51,21 @@ d3.json("../datatest.json", function(json) {
 		.attr("r", 10);
 
 		node.append("image")
-		.attr("xlink:href", "https://github.com/favicon.ico")
-		.attr("x", -8)
-		.attr("y", -8)
-		.attr("width", 30)
-		.attr("height", 30);
+		//		.attr("xlink:href", "https://github.com/favicon.ico")
+			.attr("xlink:href",function(d){return d.imageurimageurll})		
+			.attr("x", -8)
+			.attr("y", -8)
+			.attr("width", 30)
+			.attr("height", 30)
+			.attr("transform", function(d, i) {
+					return "translate(" + (Math.cos(2*Math.PI/d.length*i)*radius) +
+					"," + (Math.sin(2*Math.PI/d.length*i)*radius) + ")";
+					});
 
-		node.append("text")
-			.attr("dx", function(d) { return d.x < 180 ? 8 : -8; })
-			.attr("dy", ".31em")
-			.attr("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
-			.attr("transform", function(d) { return d.x < 180 ? null : "rotate(180)"; })
-			.text(function(d) { return d.name; });
+node.append("text")
+	.attr("dx", function(d) { return d.x < 180 ? 8 : -8; })
+	.attr("dy", ".31em")
+	.attr("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
+	.attr("transform", function(d) { return d.x < 180 ? null : "rotate(180)"; })
+	.text(function(d) { return d.name; });
 });

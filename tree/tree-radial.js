@@ -2,8 +2,12 @@ var radius = 960/ 2;
 
 	var tree = d3.layout.tree()
 .size([360, radius - 120])
-	.separation(function(a, b) { return (a.parent == b.parent ? 1 : 2) / a.depth; })
-	.children(function(d){return d.children});
+	.separation(function(a, b) { 
+return (a.parent == b.parent ? 1 : 2) / a.depth; 
+})
+	.children(function(d){
+return d.children
+});
 
 var diagonal = d3.svg.diagonal.radial()
 	.projection(function(d) { return [d.y,d.x / 180 * Math.PI]; });
@@ -12,6 +16,7 @@ var diagonal = d3.svg.diagonal.radial()
 		var r = d.y, a = (d.x - 90) / 180 * Math.PI;
 		return [r * Math.cos(a), r * Math.sin(a)];
 	}
+
 
 function step(d) {
 	var s = project(d.source),
@@ -30,6 +35,13 @@ var vis = d3.select("#chart").append("svg")
 .attr("height", radius * 2 - 150)
 .append("g")
 .attr("transform", "translate(" + radius + "," + radius + ")");
+
+var defs = vis.append("svg:defs");
+
+defs.append("svg:clipPath")
+.attr("id", "imageCircle")
+.append("svg:circle")
+.attr("r", 80);
 
 d3.json("../datatest.json", function(json) {
 		var nodes = tree.nodes(json);
@@ -50,22 +62,20 @@ d3.json("../datatest.json", function(json) {
 		node.append("circle")
 		.attr("r", 10);
 
+
 		node.append("image")
-		//		.attr("xlink:href", "https://github.com/favicon.ico")
-			.attr("xlink:href",function(d){return d.imageurimageurll})		
+			//		.attr("xlink:href", "https://github.com/favicon.ico")
+			.attr("xlink:href",function(d){return d.imageurl})		
+			.attr("clip-path", "url(#imageCircle)")
 			.attr("x", -8)
 			.attr("y", -8)
-			.attr("width", 30)
-			.attr("height", 30)
-			.attr("transform", function(d, i) {
-					return "translate(" + (Math.cos(2*Math.PI/d.length*i)*radius) +
-					"," + (Math.sin(2*Math.PI/d.length*i)*radius) + ")";
-					});
+			.attr("width", 100)
+			.attr("height", 100);
 
-node.append("text")
-	.attr("dx", function(d) { return d.x < 180 ? 8 : -8; })
-	.attr("dy", ".31em")
-	.attr("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
-	.attr("transform", function(d) { return d.x < 180 ? null : "rotate(180)"; })
-	.text(function(d) { return d.name; });
+		node.append("text")
+			.attr("dx", function(d) { return d.x < 180 ? 8 : -8; })
+			.attr("dy", ".31em")
+			.attr("text-anchor", function(d) { return d.x < 180 ? "start" : "end"; })
+			.attr("transform", function(d) { return d.x < 180 ? null : "rotate(180)"; })
+			.text(function(d) { return d.name; });
 });

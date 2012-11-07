@@ -1,6 +1,11 @@
 {
 	"name": "flare",
 "imageurl":"../picture/0.jpeg",
+"infobox":[
+{"label":"age","context":20},
+{"label":"color","context":"grey"},
+{"label":"department","context":"none"}
+],
 		"kinds":[
 		{"kind":"A",
 			"children": [

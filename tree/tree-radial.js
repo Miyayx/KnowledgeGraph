@@ -127,30 +127,26 @@ node.append("image")
 	.attr("clip-path", "url(#imageCircle)")
 	.attr("x", function(d){return (-1)*calculateRadius(d);})
 	.attr("y", function(d){return (-1)*calculateRadius(d);})
-	.attr("width", function(d){
-			return 2*calculateRadius(d);
-
-			})
-.attr("height", function(d){
-		return 2*calculateRadius(d);
-		})
-.attr("onload",function(d){
-		var svgImage = this;
-		var image = new Image();
-		image.src = d.imageurl;
-		image.onload = function(){
-		var c = calculateRadius(d)*2;
-		if(image.width > image.height){
-		svgImage.height.baseVal.value = c;
-		svgImage.width.baseVal.value = image.width*c/image.height
-
-		}else{
-
-		svgImage.height.baseVal.value = image.height*c/image.width;
-		svgImage.width.baseVal.value = c;
-		}
-		}
-		})
+	//	.attr("width", function(d){
+	//			return 2*calculateRadius(d);
+	//
+	//			})
+	//.attr("height", function(d){
+	//		return 2*calculateRadius(d);
+	//		})
+	.attr("onload",function(d){
+			var svgImage = this;
+			var image = new Image();
+			image.src = d.imageurl;
+			image.onload = function(){
+			var c = calculateRadius(d)*2;
+			if(image.width > image.height){
+			svgImage.height.baseVal.value = c;
+			svgImage.width.baseVal.value = image.width*c/image.height
+			}else{
+			svgImage.height.baseVal.value = image.height*c/image.width;
+			svgImage.width.baseVal.value = c;
+			}}})
 .attr("transform", function(d) { return "rotate("+(-d.x+90)+")"; });
 
 colorIndex = 0;
@@ -166,6 +162,38 @@ node.append("circle")
 			})
 //	.attr("fill","rgba(128,0,128,0.2)")
 .attr("fill","rgba(0,0,0,0)")
+	.on("click",function(d)
+			{
+			var ibox = d3.select("#infobox").append("table")
+			.attr("width", 100)
+			.attr("height", radius * 2 + 150)
+			.attr("transform", "translate(" + (($(window).width()/2)+radius) + "," + radius + ")");
+thead = ibox.append("thead");
+tbody = ibox.append("tbody"); 
+
+var columns = ["infobox"];
+// append the header row
+    thead.append("tr")
+        .selectAll("th")
+        .data(columns)
+        .enter()
+        .append("th")
+            .text(function(column) { return column; });
+ // create a row for each object in the data
+      var rows = tbody.selectAll("tr")
+              .data(data)
+                      .enter()
+  append("tr");
+
+//create a cell in each row for each column
+var cells = rows.selectAll("td")
+.data(function(row){
+return columns.map(function(column){
+return {column:column,value:row[column]};
+})
+})                  
+			}
+	   )
 	.attr("stroke-width",4);
 
 colorIndex = 0;

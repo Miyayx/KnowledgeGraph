@@ -9,7 +9,6 @@
   </head>
   <body>
     <div id="chart"></div>
-<div id="infobox"></div>
     <script type="text/javascript" src="tree-radial.js"></script>
   </body>
 </html>

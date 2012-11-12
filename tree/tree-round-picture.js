@@ -9,37 +9,70 @@ var vis = d3.select("#chart").append("svg")
 var image;
 
 var defs = vis.append("svg:defs");
-defs.append("svg:clipPath")
+var clipPath = defs.append("svg:clipPath")
 .attr("id", "imageCircle")
 .append("svg:circle")
-.attr("x",-8)
-.attr("y",-8)
+.attr("x",-25)
+.attr("y",-25)
 .attr("r", 50);
 
-vis.append("image")
-.attr("xlink:href","../picture/43.jpeg")		
-.attr("clip-path", "url(#imageCircle)")
-.attr("x", -50)
-.attr("y", -50)
-.attr("width",function(d){
-var width;
-		image = new Image();
-//image.src = "../picture/43.jpeg";
-//image.onload=function(){
-//width = image.width;
-//}
-image.src = this.getAttributeNS('xlink:href');
-		return image.width;		} )
-.attr("height", function(d){
-		return image.height;
-		})
+defs.append("svg:clipPath")
+.attr("id", "imageCircle2")
+.append("svg:circle")
+.attr("x",-25)
+	.attr("y",-25)
+	.transition()
+.duration(500)
+	.attr("r", 60)
 
+	vis.append("image")
+	.attr("xlink:href","../picture/43.jpeg")		
+	.attr("clip-path", "url(#imageCircle)")
+	.attr("x", -25)
+	.attr("y", -25)	
+	.attr("onload",function(d){
+		var svgImage = this;
+		var image = new Image();
+		image.src = "../picture/43.jpeg";
+		image.onload = function(){
+			svgImage.height.baseVal.value = image.height;
+			svgImage.width.baseVal.value = image.width;
+		}})
 
-vis.append("g")
-.append("circle")
+var circle = vis.append("circle")
 .attr("r", 50)
 .attr("stroke","rgba(128,0,128,0.75)")
-.attr("fill","rgba(128,0,128,0.5)")
-.attr("stroke-width",5);
+.attr("fill","rgba(0,0,0,0)")
+.attr("stroke-width",5)
+.on('mouseover',function(d){
+	circle.transition()
+	.duration(100)
+	.delay(0)
+	.attr("r",60);
 
+vis.select('image')
+	.transition()
+	.duration(0)
+	.delay(0)
+	.attr("clip-path", "url(#imageCircle2)")
+	.attr("width",function(d){
+		return this.width.baseVal.value*1.2
+	})
+.attr("height",function(d){return this.height.baseVal.value*1.2});
+})
+.on('mouseout',function(d){
+	circle.transition()
+	.duration(100)
+	.delay(0)
+	.attr("r",50);
+
+vis.select('image')
+	.transition()
+	.duration(0)
+	.delay(0)
+	.attr("clip-path", "url(#imageCircle)")
+	.attr("width",function(d){return this.width.baseVal.value/1.2;})
+.attr("height",function(d){return this.height.baseVal.value/1.2});
+
+});
 

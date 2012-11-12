@@ -30,10 +30,13 @@ function tabulate(data, columns) {
 		})
 	.enter()
 		.append("td")
-		.text(function(d) { return d.value; })
 		.attr('align','center')
 		//		.style('border','1px solid black')
-		.style('padding','5px');
+		.style('padding','5px')
+		.text(function(d) { return d.value; })
+		.transition()
+		.duration(3000)
+		.attr("fill-opacity", 1);
 
 	return table;
 }
@@ -45,8 +48,16 @@ var infodata = [
 {"label":"department","context":"none"}   
 ];
 
+var infodata2 =  [
+{"label":"name","context":"AAA"},
+{"label":"age","context":30},
+{"label":"color","context":"purple"},
+{"label":"department","context":"none"}
+];
+
 // render the table
 var table = tabulate(infodata, ["label", "context"]);
+var columns =  ["label", "context"];
 
 // uppercase the column headers
 table.selectAll("thead th")
@@ -60,24 +71,50 @@ table.selectAll("tbody tr td")
 	return 'red';
 });
 
-table.
-on('mouseover',function(){
+//table.
+//on('mouseover',function(){
+//	table
+//	.transition()
+//	.duration(1000)
+//	.selectAll("tbody tr td")
+//	.style('background-color',function(d,i){
+//		if(i%2!=0)
+//		return 'red';
+//	});
+//})
+//.on('mouseout',function(){
+//	table
+//	.transition()
+//	.duration(1000)
+//	.selectAll("tbody tr td")
+//	.style('background-color',function(d,i){
+//		if(i%2==0)
+//		return 'red';
+//	});
+//});
+
+
+function fresh(){
 	table
-	.transition()
-	.duration(1000)
-	.selectAll("tbody tr td")
-	.style('background-color',function(d,i){
-		if(i%2!=0)
-		return 'red';
-	});
-})
-.on('mouseout',function(){
-	table
-	.transition()
-	.duration(1000)
-	.selectAll("tbody tr td")
-	.style('background-color',function(d,i){
-		if(i%2==0)
-		return 'red';
-	});
-});
+		.transition()
+		.duration(1000)
+		.selectAll("tbody tr td")
+		.style('background-color',function(d,i){
+			if(i%2==0)
+			return 'yellow';
+		});
+
+	var rows =  table.select('tbody').selectAll('tr')
+		.data(infodata2)
+
+	rows.selectAll("td")
+		.data(function(row) {
+			return columns.map(function(column) {
+				return {column: column, value: row[column]};
+			})
+		})
+		.transition()
+		.duration(500)
+		.delay(1000)
+		.text(function(d) { return d.value; });
+}

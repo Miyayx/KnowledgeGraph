@@ -1,5 +1,11 @@
 var radius = 960/ 2;
 
+var infodata = [
+{"label":"age","context":20},
+{"label":"color","context":"grey"},
+{"label":"department","context":"none"}   
+]
+
 var vis = d3.select("#chart").append("svg")
 .attr("width", radius * 2)
 .attr("height", radius * 2 - 150)
@@ -41,7 +47,7 @@ defs.append("svg:clipPath")
 
 var circle = vis.append("circle")
 .attr("r", 50)
- .style("cursor", "pointer")
+.style("cursor", "pointer")
 .attr("stroke","rgba(128,0,128,0.75)")
 .attr("fill","rgba(0,0,0,0)")
 .attr("stroke-width",5)
@@ -56,6 +62,7 @@ vis.select('image')
 		return this.width.baseVal.value*1.2
 	})
 .attr("height",function(d){return this.height.baseVal.value*1.2});
+
 })
 .on('mouseout',function(d){
 	circle.transition()
@@ -69,6 +76,6 @@ vis.select('image')
 
 })
 .on('click',function(d){
-
+	var infobox = createInfobox(vis,infodata);
 });
 

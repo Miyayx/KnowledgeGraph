@@ -1,0 +1,12 @@
+.infobox{
+	stroke: "red";
+	stroke-opacity: 0.5;
+	stroke-width: 3px;
+	fill: "red";
+
+}
+
+.infobox rect{
+	height: 10px;
+	fill: "white";
+}

@@ -1,23 +1,26 @@
 function tabulate(position, data, columns, caption) {
 	var table = position.append("table"),
-	    caption = table.append("caption"),
+	    tcaption = table.append("caption"),
 	    thead = table.append("thead"),
 	    tbody = table.append("tbody");
 
 	table
 		.style('border-collapse', 'collapse')
 		.style('border', '2px solid black');
-	
-	caption.text(caption);
+
+	tcaption
+		.style('border-collapse', 'collapse')
+		.style('border', '2px solid black')
+		.text(caption);
 
 	// append the header row
-	thead.append("tr")
+	/*	thead.append("tr")
 		.selectAll("th")
-		.data([])
+		.data(columns)
 		.enter()
 		.append("th")
-		.text(function(column) { return null; });
-
+		.text(function(column) { return column; });
+		*/
 	// create a row for each object in the data
 	var rows = tbody.selectAll("tr")
 		.data(data)
@@ -37,6 +40,8 @@ function tabulate(position, data, columns, caption) {
 		//		.style('border','1px solid black')
 		.style('padding','5px')
 		.text(function(d) { return d.value; })
+		.attr("width",100)
+		.attr("height",100)
 		.transition()
 		.duration(3000)
 		.attr("fill-opacity", 1);
@@ -58,21 +63,25 @@ var infodata2 =  [
 {"label":"department","context":"none"}
 ];
 
+
+/*
 // render the table
-var table = tabulate(infodata, ["label", "context"],"InfoBox");
+var table = tabulate(d3.select("#infobox"),infodata, ["label", "context"],"InfoBox");
 var columns =  ["label", "context"];
 
 // uppercase the column headers
 table.selectAll("thead th")
 .text(function(column) {
-	return column.charAt(0).toUpperCase() + column.substr(1);
+return column.charAt(0).toUpperCase() + column.substr(1);
 });
+
 
 table.selectAll("tbody tr td")
 .style('background-color',function(d,i){
-	if(i%2==0)
-	return 'red';
+if(i%2==0)
+return 'red';
 });
+*/
 
 //table.
 //on('mouseover',function(){
@@ -120,4 +129,11 @@ function fresh(){
 		.duration(500)
 		.delay(1000)
 		.text(function(d) { return d.value; });
+}
+
+function remove(){
+	table
+		.transition()
+		.duration(300)
+		.remove();
 }

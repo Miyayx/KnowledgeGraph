@@ -1,0 +1,158 @@
+每个node的内容都是这样的：
+
+{
+
+"name":"",
+"imageurl":"",
+"infobox":[
+{"label":"","context":""}
+{"label":"","context":""}
+{"label":"","context":""}
+...
+
+节点里还有什么内容就往这里加
+
+]
+
+}
+
+有两中Json格式，学长挑一个：
+
+1）
+
+对于主节点来说，它连接不同种类的其他节点，因此有一个categories属性，里面是数组，数组元素是不同种类以及种类下的节点，种类名是category，节点形成children数组。
+
+对于不带关系的节点，放在children的undirected（好像不应该叫这个名字。。。）数组里
+
+example：
+
+
+{
+
+"name":"",
+"imageurl":"",
+"infobox":[
+	{"label":"","context":""}
+	{"label":"","context":""}
+	{"label":"","context":""}
+
+]
+"categories":[
+{
+	"category":"A",
+	"children":[
+		{
+		"name":"",
+		"imageurl":"",
+		"infobox":[
+			{"label":"","context":""}
+			{"label":"","context":""}
+			{"label":"","context":""}
+			]
+		},
+		{
+		"name":"",
+		"imageurl":"",
+		"infobox":[
+			{"label":"","context":""}
+			{"label":"","context":""}
+			{"label":"","context":""}
+			]
+		},
+		"undirected" :[
+				{
+				"name":"",
+				"imageurl":"",
+				"infobox":[
+					{"label":"","context":""}
+					{"label":"","context":""}
+					{"label":"","context":""}
+					]
+				},
+				{
+				"name":"",
+				"imageurl":"",
+				"infobox":[
+					{"label":"","context":""}
+					{"label":"","context":""}
+					{"label":"","context":""}
+					]
+				}
+
+				]
+
+
+		]
+
+},{
+
+	"category":"B",
+	"children":[
+			...
+			]
+
+}
+]
+
+}
+
+
+略复杂。
+
+
+2）
+
+其实可以有很简单的方式：把category和directed都归为一个node的属性
+{
+
+"name":"",
+"imageurl":"",
+"infobox":[
+	{"label":"","context":""}
+	{"label":"","context":""}
+	{"label":"","context":""}
+
+]
+	
+"children":[
+		{
+		"name":"",
+		"imageurl":"",
+		"infobox":[
+			{"label":"","context":""}
+			{"label":"","context":""}
+			{"label":"","context":""}
+			]，
+		"category":"A",
+		"directed":"true"
+		},
+		{
+		"name":"",
+		"imageurl":"",
+		"infobox":[
+			{"label":"","context":""}
+			{"label":"","context":""}
+			{"label":"","context":""}
+			]，
+		"category":"B",
+		"directed":"true"
+		},
+		{
+		"name":"",
+		"imageurl":"",
+		"infobox":[
+			{"label":"","context":""}
+			{"label":"","context":""}
+			{"label":"","context":""}
+			]，
+		"category":"A",
+		"directed":"false"
+		}
+	]
+}
+
+
+其实因为分类要在图上体现这个事，服务器和客户端一定会有一方对node有个归类整理，前者是服务器比较麻烦，后者是客户端要再对数据处理一下。
+学长挑自己方便的来吧。
+
+

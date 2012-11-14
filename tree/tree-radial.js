@@ -70,7 +70,7 @@ vis.append("svg:defs")
 //.attr("r", radius+75)
 //.attr("fill","black");
 
-d3.json("../datatest2.json", function(json) {
+d3.json("../datatest.json", function(json) {
 	var nodes = tree.nodes(json);
 
 	var calculateRadius = function(d){

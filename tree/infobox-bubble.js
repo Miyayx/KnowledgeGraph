@@ -61,17 +61,30 @@ function createInfobox(canvas,data){
 		.attr("height",ibHeight+10)
 		.attr("x",0)
 		.attr("y",0)
-		.attr("fill","red");
+
+		infobox.append("rect")
+		.attr("width",maxLabelLength+maxContextLength+10)
+		.attr("height",ibHeight+10)
+		.attr("x",0)
+		.attr("y",0)
+		.attr("fill","yellow")
+		.attr("stroke","blue")
+		.attr("stroke-width",5);
 
 	infobox.append("rect")
 		.attr("x",0)
 		.attr("y",0)
 		.attr("width",maxLabelLength+maxContextLength+10)
 		.attr("height",lineH)
-		.attr("fill","blue")
-			.text("Infobox");
+		.attr("fill","blue");
 
-		var currentH = 0;
+	infobox.append("text")
+		.attr("x",0)
+		.attr("y",lineH)
+		.attr("text-anchor","center")
+		.text("Infobox");
+
+	var currentH = lineH;
 	infobox.selectAll("rect")
 		.data(data)
 		.enter()
@@ -89,7 +102,7 @@ function createInfobox(canvas,data){
 		.data(data)
 		.enter()
 		.append("rect")
-		.attr("x",0)
+		.attr("x",maxLabelLength)
 		.attr("y",function(d,i){
 			var myH = currentH;
 			currentH = currentH+(Math.floor(d.context.length/16)+1)*lineH;

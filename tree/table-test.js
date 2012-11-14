@@ -1,19 +1,22 @@
-function tabulate(data, columns) {
-	var table = d3.select("#infobox").append("table"),
+function tabulate(position, data, columns, caption) {
+	var table = position.append("table"),
+	    caption = table.append("caption"),
 	    thead = table.append("thead"),
 	    tbody = table.append("tbody");
 
 	table
 		.style('border-collapse', 'collapse')
 		.style('border', '2px solid black');
+	
+	caption.text(caption);
 
 	// append the header row
 	thead.append("tr")
 		.selectAll("th")
-		.data(["infobox"])
+		.data([])
 		.enter()
 		.append("th")
-		.text(function(column) { return "infobox"; });
+		.text(function(column) { return null; });
 
 	// create a row for each object in the data
 	var rows = tbody.selectAll("tr")
@@ -56,7 +59,7 @@ var infodata2 =  [
 ];
 
 // render the table
-var table = tabulate(infodata, ["label", "context"]);
+var table = tabulate(infodata, ["label", "context"],"InfoBox");
 var columns =  ["label", "context"];
 
 // uppercase the column headers
@@ -107,13 +110,13 @@ function fresh(){
 	var rows =  table.select('tbody').selectAll('tr')
 		.data(infodata2)
 
-	rows.selectAll("td")
+		rows.selectAll("td")
 		.data(function(row) {
 			return columns.map(function(column) {
 				return {column: column, value: row[column]};
 			})
 		})
-		.transition()
+	.transition()
 		.duration(500)
 		.delay(1000)
 		.text(function(d) { return d.value; });

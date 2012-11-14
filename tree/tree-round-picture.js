@@ -41,19 +41,16 @@ defs.append("svg:clipPath")
 
 var circle = vis.append("circle")
 .attr("r", 50)
+ .style("cursor", "pointer")
 .attr("stroke","rgba(128,0,128,0.75)")
 .attr("fill","rgba(0,0,0,0)")
 .attr("stroke-width",5)
 .on('mouseover',function(d){
 	circle.transition()
-	.duration(100)
-	.delay(0)
+	.duration(50)
 	.attr("r",60);
 
 vis.select('image')
-	.transition()
-	.duration(0)
-	.delay(0)
 	.attr("clip-path", "url(#imageCircle2)")
 	.attr("width",function(d){
 		return this.width.baseVal.value*1.2
@@ -62,17 +59,16 @@ vis.select('image')
 })
 .on('mouseout',function(d){
 	circle.transition()
-	.duration(100)
-	.delay(0)
+	.duration(50)
 	.attr("r",50);
 
 vis.select('image')
-	.transition()
-	.duration(0)
-	.delay(0)
 	.attr("clip-path", "url(#imageCircle)")
 	.attr("width",function(d){return this.width.baseVal.value/1.2;})
-.attr("height",function(d){return this.height.baseVal.value/1.2});
+	.attr("height",function(d){return this.height.baseVal.value/1.2});
+
+})
+.on('click',function(d){
 
 });
 

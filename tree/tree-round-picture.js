@@ -3,7 +3,7 @@ var radius = 960/ 2;
 var infodata = [
 {"label":"age","context":20},
 {"label":"color","context":"grey"},
-{"label":"department","context":"none"}   
+{"label":"department","context":"non0kjgfsdwetoijnhgfvcdsxzae"}   
 ]
 
 var vis = d3.select("#chart").append("svg")
@@ -44,7 +44,7 @@ defs.append("svg:clipPath")
 			svgImage.height.baseVal.value = image.height;
 			svgImage.width.baseVal.value = image.width;
 		}})
-
+var infobox;
 var circle = vis.append("circle")
 .attr("r", 50)
 .style("cursor", "pointer")
@@ -59,9 +59,10 @@ var circle = vis.append("circle")
 vis.select('image')
 	.attr("clip-path", "url(#imageCircle2)")
 	.attr("width",function(d){
-		return this.width.baseVal.value*1.2
-	})
-.attr("height",function(d){return this.height.baseVal.value*1.2});
+		return this.width.baseVal.value*1.2 })
+	.attr("height",function(d){return this.height.baseVal.value*1.2});
+
+//infobox = createInfobox(vis,infodata);
 
 })
 .on('mouseout',function(d){
@@ -74,8 +75,18 @@ vis.select('image')
 	.attr("width",function(d){return this.width.baseVal.value/1.2;})
 	.attr("height",function(d){return this.height.baseVal.value/1.2});
 
+//infobox.remove();
 })
 .on('click',function(d){
 	var infobox = createInfobox(vis,infodata);
+	infobox.selectAll("rect.label")
+	.attr("fill","rgba(128,0,128,0.5)");
+
+infobox.selectAll("rect.context")
+	.attr("fill","white");
+
+infobox.select("rect.background")
+	.attr("stroke","blue");
+
 });
 

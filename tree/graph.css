@@ -1,10 +1,14 @@
+
 .infobox {
 font-size: 15px;
 text-anchor: middle
 }
 .infobox rect.background{
 	stroke-opacity: 0.5;
-	stroke-width: 3px;
+	stroke-width: 5px;
 	fill: transparent
 }
 
+.infobox rect.label{
+	fill-opacity:0.5
+}

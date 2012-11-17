@@ -1,7 +1,11 @@
-var myCvs;
-var captionH = 30;
-var limitContextL = 16;
+var myCvs;  //the canvas of infobox that svg elements will put on 
+var captionH = 30; // caption(title) line height
+var limitContextL = 16; // limited context length
+var infobox_p_width = 35; // pointer width ,the triangle
+var infobox_p_height = 30;
+var infobox_lineH = 20; // each line's height
 
+//get the width of text box which will be put onto the screen
 function getTextLength(string){
 	var text =  myCvs.append("text").text(string);
 	var l = text.node().getBBox().width;
@@ -9,6 +13,7 @@ function getTextLength(string){
 	return l;
 }
 
+//get the longest label to get width of label rect
 function getMaxLabelString(data){
 	var ml = 0;
 	var maxs;
@@ -21,6 +26,7 @@ function getMaxLabelString(data){
 	return maxs;
 }
 
+//get the longest context to get width of context rect
 function getMaxContextString(data){
 	var ml = 0;
 	var maxs;
@@ -30,7 +36,8 @@ function getMaxContextString(data){
 			maxs = data[i].context;
 		}
 	}
-	return maxs.length>limitContextL ? "aaaaaaaaaaaaaaaa" : maxs;
+	return maxs.length>limitContextL ? "aaaaaaaaaaaaaaaa" : maxs; 
+	//the length will not larger than 16. If it's longer, then line feed
 }
 
 function calculateiBoxHeight(data){
@@ -39,15 +46,13 @@ function calculateiBoxHeight(data){
 	for(i=0;i<data.length;i++){
 		linenum = linenum+Math.floor(data[i].context.toString().length/limitContextL)+1;
 	}
-	return lineH*linenum+captionH;
-}
+	return infobox_lineH*linenum+captionH;//including caption and all the lines
+	}
 
-var lineH = 20;
-
-function createInfobox(canvas,data){
-	myCvs = canvas;
-	var maxLabelString,maxContextString,
-	    maxLabelLength,maxContextLength;
+	function createInfobox(canvas,data){
+		myCvs = canvas;
+		var maxLabelString,maxContextString,
+		maxLabelLength,maxContextLength;
 
 	var ibHeight = calculateiBoxHeight(data);
 
@@ -57,19 +62,21 @@ function createInfobox(canvas,data){
 	maxLabelLength = getTextLength(maxLabelString);
 	maxContextLength = getTextLength(maxContextString);
 
-	var roundD = 15;
-	var margin = 7;
-	var boxWidth = margin+maxLabelLength+maxContextLength+margin+10;
-	var boxHeight = margin+ibHeight+margin;
+	var roundD = 15; //we will create a rounded rect
+	var padding = 7; //blank between text and box boundary 
+	var boxWidth = padding+maxLabelLength+maxContextLength+padding+10; 
+	//two side padding blank,label column width,context column width and column distance
+	var boxHeight = padding+ibHeight+padding;
 
+	//calculate the text vertical center using d
 	calculateTextH = function(d,i){
 		var myH = currentH;
-		currentH = currentH+(Math.floor(d.context.toString().length/limitContextL)+1)*lineH;
-		return myH+lineH/2;
+		currentH = currentH+(Math.floor(d.context.toString().length/limitContextL)+1)*infobox_lineH;
+		return myH+infobox_lineH/2;
 	}
 
 	infobox = canvas.append("g")
-		.attr("class","infobox")
+		.attr("class","infobox")//in graph.css
 		.attr("width",boxWidth)
 		.attr("height",boxHeight);
 
@@ -82,67 +89,72 @@ function createInfobox(canvas,data){
 		.attr("width",boxWidth)
 		.attr("height",boxHeight);
 
+	//background of label column
 	infobox.append("rect")
 		.attr("class","label")
 		.attr("y",captionH)
 		.attr("clip-path","url(#infobox-clip)")
-		//.attr("fill","blue")
-		.attr("width",margin+maxLabelLength+5)
+		.attr("width",padding+maxLabelLength+5)
 		.attr("height",boxHeight-captionH);
 
+	//background of context column
 	infobox.append("rect")
 		.attr("class","context")
-		.attr("x",margin+maxLabelLength+maxContextLength/2+5)
+		.attr("x",padding+maxLabelLength+maxContextLength/2+5)
 		.attr("y",captionH)
 		.attr("clip-path","url(#infobox-clip)")
 		//.attr("fill","white")
-		.attr("width",5+maxContextLength+margin)
+		.attr("width",5+maxContextLength+padding)
 		.attr("height",boxHeight-captionH);
 
+	//write caption "Infobox"
 	infobox.append("text")
 		.attr("dx",boxWidth/2)
-		.attr("dy",captionH/2+margin)
+		.attr("dy",captionH/2+padding)
 		//	.attr("transform")
 		.attr("text-anchor","middle")
 		.attr("font-weight","bold")
 		.text("Infobox");
 
-	var currentH = margin+captionH;
+	//write label
+	var currentH = padding+captionH;
 	infobox.selectAll("text.label")
 		.data(data)
 		.enter()
 		.append("text")
-		.attr("x",margin+maxLabelLength/2)
+		.attr("x",padding+maxLabelLength/2)
 		.attr("y",calculateTextH)
 		.attr("width",maxLabelLength)
-		.attr("height",lineH)
+		.attr("height",infobox_lineH)
 		.text(function(d){ return d.label });
 
-	var currentH = margin+captionH;
+	// write context
+	var currentH = padding+captionH;
 	infobox.selectAll("text.context")
 		.data(data)
 		.enter()
 		.append("text")
-		.attr("x",margin+maxLabelLength+maxContextLength/2+10)
+		.attr("x",padding+maxLabelLength+maxContextLength/2+10)
 		.attr("y",function(d,i){
 			d.y = calculateTextH(d,i);
 			return d.y;	})
 		.attr("width",maxContextLength)
 		.attr("height",function(d){
-			return  (Math.floor(d.context.toString().length/limitContextL)+1)*lineH;
+			return  (Math.floor(d.context.toString().length/limitContextL)+1)*infobox_lineH;
 		})
 	//	.text(function(d){return d.context});
-	.each(function(d,i){
+	.each(function(d,i){ // use tag<tspan> to write context for it maybe too long to divided into multiline.
 		var textBlock = d3.select(this);
 		for(j = 0; j < Math.floor(d.context.toString().length/limitContextL)+1; j++){
 			textBlock
 		.append("tspan")
-		.attr("x",margin+maxLabelLength+maxContextLength/2+10)
-		.attr("y",d.y+lineH*j)
+		.attr("x",padding+maxLabelLength+maxContextLength/2+10)
+		.attr("y",d.y+infobox_lineH*j)
 		.text(d.context.toString().substring(limitContextL*j,limitContextL*(j+1)-1));	
 		}
 	})
 
+	// draw the boundary
 	infobox.append("rect")
 		.attr("width",boxWidth)
 		.attr("height",boxHeight)
@@ -150,21 +162,26 @@ function createInfobox(canvas,data){
 		.attr("ry",roundD)
 		.attr("class","background");
 
+	//draw the pointer
 	infobox.append("polygon")
-		.attr("point",function(d){
-			var c = [];
+		.attr("points",function(d){
 			var labelRect = d3.select("rect.label").node();
-			var x = labelRect.x.baseVal.value;
-			var y = labelRect.y.baseVal.value;
-			c[0].x = x;
-			c[0].y = y;
-			c[1].x = x - 10;
-			c[1].y = y;
-			c[2].x = x;
-			c[2].y = y+20;
+			//		var x = labelRect.x.baseVal.value;
+			//		var y = labelRect.y.baseVal.value;
+			//	var c = [
+			//		[x,y],
+			//		[x-30,y],
+			//		[x,y+25]];
+			var x = boxWidth;
+			var y = captionH;
+			var c = [
+			[x,y],
+			[x+infobox_p_width,y],
+			[x,y+infobox_p_height]
+			];
 
-			return c[0].x+","+c[0].y+" "+c[1].x+","+c[1].y+" "+c[2].x+","+c[2].y;
+		return c[0][0]+","+c[0][1]+" "+c[1][0]+","+c[1][1]+" "+c[2][0]+","+c[2][1];
 		})
 	return infobox;
 
-}
+	}

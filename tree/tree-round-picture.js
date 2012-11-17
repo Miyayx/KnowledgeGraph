@@ -2,7 +2,7 @@ var radius = 960/ 2;
 
 var infodata = [
 {"label":"age","context":20},
-{"label":"color","context":"grey"},
+{"label":"color","context":"greydskgshdndsgsdljfskfjlsghkldsnfeinginvldjfldshg"},
 {"label":"department","context":"non0kjgfsdwetoijnhgfvcdsxzae"}   
 ]
 
@@ -88,5 +88,12 @@ infobox.selectAll("rect.context")
 infobox.select("rect.background")
 	.attr("stroke","blue");
 
+infobox.select("polygon")
+	.attr("fill","blue")
+	.attr("fill-opacity",0.5);
+
+infobox
+	.attr("transform","matrix(1 0 0 -1 80 "+captionH+")"); 
+	
 });
 

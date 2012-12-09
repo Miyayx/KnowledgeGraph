@@ -1,0 +1,122 @@
+{
+	"name" : "CommunityStructure",
+		"imageurl" : "../picture/2.jpeg",
+		"infobox":[
+		{"label":"age","context":20},
+		{"label":"color","context":"grey"},
+		{"label":"department","context":"none"}
+	],
+
+		"categories" : [{
+			"category" : "A",
+			"children" : [{
+				"name" : "A",
+				"size" : 3938,
+				"infobox":[
+				{"label":"age","context":20},
+				{"label":"color","context":"grey"},
+				{"label":"department","context":"none"}
+				],
+					"imageurl" : "http://img2.duitang.com/uploads/item/201112/27/20111227112505_kWmT5.jpg"
+
+			}, {
+				"name" : "flare",
+				"size" : 3812,
+				"infobox":[
+				{"label":"age","context":20},
+				{"label":"color","context":"grey"},
+				{"label":"department","context":"none"}
+				],
+					"imageurl" : "../picture/0.jpeg"
+			},
+ {
+				"undirected" : [ {
+					"name" : "Shortest",
+						"size" : 5914,
+						"infobox":[
+						{"label":"age","context":20},
+						{"label":"color","context":"grey"},
+						{"label":"department","context":"none"}
+					],
+						"imageurl" : "http://cdn.duitang.com/uploads/item/201112/27/20111227135316_KNQWr.jpg"
+				}]
+			}
+			]
+		}, {
+			"category" : "B",
+				"children" : [ {
+					"undirected" : [ {
+						"name" : "Sh",
+							"size" : 5914,
+							"imageurl" : "http://img2.duitang.com/uploads/item/201209/18/20120918215308_E48Tn.jpeg"
+					}, {
+						"name" : "SpanningTree",
+							"size" : 3416,
+							"imageurl" : "http://img2.duitang.com/uploads/item/201211/20/20121120193106_QhePz.jpeg"
+					}, {
+						"name" : "Aspect",
+							"size" : 7074,
+							"infobox":[
+							{"label":"age","context":20},
+							{"label":"color","context":"grey"},
+							{"label":"department","context":"none"}
+						],
+							"imageurl" : "http://cdn.duitang.com/uploads/item/201212/04/20121204211554_PPkkJ.jpeg"
+					}]
+				}
+
+			]
+		}, {
+			"category" : "C",
+				"children" : [{
+					"name" : "FlareVis",
+					"size" : 4116,
+					"infobox":[
+					{"label":"age","context":20},
+					{"label":"color","context":"grey"},
+					{"label":"department","context":"none"}
+					],
+						"imageurl" : "http://cdn.duitang.com/uploads/item/201211/09/20121109142744_ZVf8B.jpeg"
+				}, {
+					"name" : "DragForce",
+					"size" : 1082,
+					"infobox":[
+					{"label":"age","context":20},
+					{"label":"color","context":"grey"},
+					{"label":"department","context":"none"}
+					],
+						"imageurl" : "http://img2.duitang.com/uploads/item/201212/07/20121207141020_3jUQT.jpeg"
+				}, {
+					"name" : "xfgravityForce",
+					"size" : 1336,
+					"infobox":[
+					{"label":"age","context":20},
+					{"label":"color","context":"grey"},
+					{"label":"department","context":"none"}
+					],
+						"imageurl" : "http://cdn.duitang.com/uploads/item/201211/17/20121117115040_KsVrj.thumb.200_0.jpeg"
+				}, {
+					"undirected" : [{
+						"name" : "dddwwwe",
+							"size" : 1681,
+							"infobox":[
+							{"label":"age","context":20},
+							{"label":"color","context":"grey"},
+							{"label":"department","context":"none"}
+						],
+							"imageurl" : "http://ww2.sinaimg.cn/bmiddle/74f67c55jw1dzlacsm6huj.jpg"
+					}, {
+						"name" : "jjkskdjg",
+							"size" : 2105,
+							"infobox":[
+							{"label":"age","context":20},
+							{"label":"color","context":"grey"},
+							{"label":"department","context":"none"}
+						],
+							"imageurl" : "http://ww2.sinaimg.cn/bmiddle/4b66ade8gw1dzkcvtsfkyj.jpg"
+					}]
+				}
+
+			]
+		}]
+}

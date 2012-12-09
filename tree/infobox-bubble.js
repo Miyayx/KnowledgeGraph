@@ -47,12 +47,12 @@ function calculateiBoxHeight(data){
 		linenum = linenum+Math.floor(data[i].context.toString().length/limitContextL)+1;
 	}
 	return infobox_lineH*linenum+captionH;//including caption and all the lines
-	}
+}
 
-	function createInfobox(canvas,data){
-		myCvs = canvas;
-		var maxLabelString,maxContextString,
-		maxLabelLength,maxContextLength;
+function createInfobox(canvas,data){
+	myCvs = canvas;
+	var maxLabelString,maxContextString,
+	    maxLabelLength,maxContextLength;
 
 	var ibHeight = calculateiBoxHeight(data);
 
@@ -78,7 +78,8 @@ function calculateiBoxHeight(data){
 	infobox = canvas.append("g")
 		.attr("class","infobox")//in graph.css
 		.attr("width",boxWidth)
-		.attr("height",boxHeight);
+		.attr("height",boxHeight)
+		.attr("render-order",1); // put the element on the toppest
 
 	infobox.append("svg:defs")
 		.append("svg:clipPath")
@@ -184,4 +185,4 @@ function calculateiBoxHeight(data){
 		})
 	return infobox;
 
-	}
+}

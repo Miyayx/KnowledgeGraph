@@ -37,12 +37,13 @@ defs.append("svg:clipPath")
 	.attr("x", -25)
 	.attr("y", -25)	
 	.attr("onload",function(d){
-		var svgImage = this;
+		var svgImage = d3.select(this);
 		var image = new Image();
 		image.src = "../picture/43.jpeg";
 		image.onload = function(){
-			svgImage.height.baseVal.value = image.height;
-			svgImage.width.baseVal.value = image.width;
+			svgImage.attr("height",image.height);
+			svgImage.attr("width",image.width);
+
 		}})
 var infobox;
 var circle = vis.append("circle")
@@ -94,6 +95,6 @@ infobox.select("polygon")
 
 infobox
 	.attr("transform","matrix(1 0 0 -1 80 "+captionH+")"); 
-	
+
 });
 

@@ -57,7 +57,7 @@ var diagonal = d3.svg.diagonal.radial()
 	//.attr("r", radius+75)
 	//.attr("fill","black");
 
-	d3.json("../data-infobox.json", function(json) {
+	d3.json("../data-infobox4.json", function(json) {
 		currentRoot = json;
 
 		update(currentRoot);	

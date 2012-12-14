@@ -67,7 +67,7 @@ function update(source) {
 		if(d.r) return;
 		if(d.name == undefined) { d.r = 0; }
 		else if (d.depth == 0) { d.r = 65; }
-		else { d.r = 70/d.depth; }
+		else { d.r = 75/d.depth; }
 	});
 
 	//choose color for every node and assign it to d.color
@@ -136,31 +136,47 @@ function update(source) {
 	var allCircle =	nodeEnter.append("circle")
 		.attr("class","imageBorder")
 		.attr("stroke-opacity","1e-6")
-		.attr("stroke-width",3)
-		.attr("fill","white")
-		.attr("fill-opacity",0)
-		.style("cursor", "pointer")
-		.on('mouseout',function(d){
-
-			//recover the state 
-			var circle =  d3.select(this);
-			circle.transition()
-			.duration(50)
-			.attr("r",function(d){ return d.r; });	
-		d3.select(this.parentNode).select('image')
-			.attr("clip-path",function(d,i){ return "url(#"+d.clip_normal+")";})
-			.attr("width",function(d){return Math.floor(d.imgwidth);})
-			.attr("height",function(d){return Math.floor(d.imgheight);})
-			.attr("x",function(d){ return (-1)*d.imgwidth/2;})
-			.attr("y",function(d){ return (-1)*d.imgheight/2;});
-
-		// remove infobox
-		d3.select(this.parentNode).select('g').remove();
+		.on("click",function(d){
+			if(d.depth === 0){ // if it's the root node,then turn back to the prev data
+				data = dataStack.pop();
+				if(data){
+					currentRoot = data;
+					update(currentRoot);
+				}
+			}else{
+				d3.json("../data-infobox2.json", function(json) {
+					dataStack.push(currentRoot);
+					currentRoot = json;
+					update(currentRoot);	
+				});
+			}
 		})
-	.on('mouseover',function(d){
-		//magnify the circle
+	.on('mouseout',function(d){
+		d.isover = false;//the mouse isn't over the circle
+		//recover the state 
 		var circle =  d3.select(this);
 		circle.transition()
+		.duration(50)
+		.attr("r",function(d){ return d.r; });	
+	d3.select(this.parentNode).select('image')
+		.attr("clip-path",function(d,i){ return "url(#"+d.clip_normal+")";})
+		.attr("width",function(d){return Math.floor(d.imgwidth);})
+		.attr("height",function(d){return Math.floor(d.imgheight);})
+		.attr("x",function(d){ return (-1)*d.imgwidth/2;})
+		.attr("y",function(d){ return (-1)*d.imgheight/2;});
+
+	// remove infobox
+	d3.select(this.parentNode).select('g').remove();
+	})
+	.on('mouseover',function(d){
+		if(d3.select(this.parentNode).select("g.infobox").node()) // if infobox has been created
+		return;
+	if(d.isover) return;// if the mouse already over the circle
+
+	d.isover = true; // the mouse is over the circle
+	//magnify the circle
+	var circle =  d3.select(this);
+	circle.transition()
 		.duration(50)
 		.attr("r",function(d){ return d.r*1.2; })
 		.attr("fill-opacity",0);
@@ -182,155 +198,127 @@ function update(source) {
 
 	});
 
-	allCircle.on("click",function(d){
-		if(d.depth === 0){ // if it's the root node,then turn back to the prev data
-			data = dataStack.pop();
-			if(data){
-				currentRoot = data;
-				update(currentRoot);
-			}
-		}else{
-			d3.json("../data-infobox2.json", function(json) {
-				dataStack.push(currentRoot);
-				currentRoot = json;
-				update(currentRoot);	
-			});
-		}
-	});
 
-	/*nodeEnter
-	  .on('mouseover',function(d){
-//magnify the circle
-var circle =  d3.select(this).select("circle.imageBorder");
-circle.transition()
-.duration(50)
-.attr("r",function(d){ return d.r*1.2; })
-.attr("fill-opacity",0);
+	//write label
+	nodeEnter.append("text")
+		.attr("dx", function(d) { 
+			return (d.x > 90)&&(d.x < 270) ? d.r+5 : (-1)*d.r-5; 
+		})
+	.attr("dy", ".31em")
+		.attr("text-anchor", function(d) { return (d.x > 90)&&(d.x < 270) ? "start" : "end"; })
+		.attr("transform", function(d) {
+			return (d.x > 90)&&(d.x < 270) ? null : "rotate(180)"; })
+		.attr("stroke-width",1)
+		.attr("fill-opacity","1e-6")
+		.text(function(d) { return d.name; });
 
-//magnify the image 
-d3.select(this).select('image')
-.attr("clip-path",function(d,i){ return "url(#"+d.clip_large+")";})
-.attr("width",function(d){
-return this.width.baseVal.value*1.2;	})
-.attr("height",function(d){
-return this.height.baseVal.value*1.2;	})
-.attr("x",function(d){ return (-1)*this.width.baseVal.value/2;})
-.attr("y",function(d){ return (-1)*this.height.baseVal.value/2;});
+	//write relationship
 
-this.parentNode.insertBefore(this);// bring this node and its infobox to the front
-//	 if there is infomation, draw infobox
-if(d.infobox == undefined)	return;
-renderInfobox(d3.select(this),d);
 
-})
-.on('mouseout',function(d){
-//recover the state 
-var circle =  d3.select(this).select("circle.imageBorder");
-circle.transition()
-.duration(50)
-.attr("r",function(d){ return d.r;});	
-d3.select(this).select('image')
-.attr("clip-path",function(d,i){ return "url(#"+d.clip_normal+")";})
-.attr("width",function(d){return Math.floor(this.width.baseVal.value/1.2);})
-.attr("height",function(d){return Math.floor(this.height.baseVal.value/1.2);})
-.attr("x",function(d){ return (-1)*this.width.baseVal.value/2;})
-.attr("y",function(d){ return (-1)*this.height.baseVal.value/2;});
-
-// remove infobox
-d3.select(this).select('g').remove();
-})
-.on("click",function(d){
-if(d.depth === 0){ // if it's the root node,then turn back to the prev data
-data = dataStack.pop();
-if(data){
-currentRoot = data;
-update(currentRoot);
-}
-}else{
-d3.json("../data-infobox2.json", function(json) {
-dataStack.push(currentRoot);
-currentRoot = json;
-update(currentRoot);	
-});
-}
-});*/
-
-//write label
-nodeEnter.append("text")
-.attr("dx", function(d) { 
-	return (d.x > 90)&&(d.x < 270) ? d.r+5 : (-1)*d.r-5; 
-})
-.attr("dy", ".31em")
-.attr("text-anchor", function(d) { return (d.x > 90)&&(d.x < 270) ? "start" : "end"; })
-.attr("transform", function(d) {
-	return (d.x > 90)&&(d.x < 270) ? null : "rotate(180)"; })
-.attr("stroke-width",1)
-.attr("fill-opacity","1e-6")
-.text(function(d) { return d.name; });
-
-//------------------------------ Update Trasition ----------------------------------//
-// Transition all nodes to their new position.
+	//------------------------------ Update Trasition ----------------------------------//
+	// Transition all nodes to their new position.
 	var nodeUpdate = node.transition()
-.duration(duration)
-	.attr("transform", function(d) {return "rotate(" + (d.x+180) + ")translate(" + d.y + ")"; });
+		.duration(duration)
+		.attr("transform", function(d) {return "rotate(" + (d.x+180) + ")translate(" + d.y + ")"; });
 
 	nodeUpdate.select("image")
-	.attr("clip-path",function(d,i){ return "url(#"+d.clip_normal+")";})
-	.attr("visibility", "visible");
+		.attr("clip-path",function(d,i){ return "url(#"+d.clip_normal+")";})
+		.attr("visibility", "visible");
 
 	nodeUpdate.select("text")
-	.attr("fill",function(d){ return d.color;})
-	.style("fill-opacity", 1);
+		.attr("fill",function(d){ return d.color;})
+		.style("fill-opacity", 1);
 
 	nodeUpdate.select("circle.imageBorder")
-	.attr("r", function(d){return d.r})
-	.attr("stroke",function(d){return d.color;})
-	.attr("stroke-opacity",0.5);
+		.attr("r", function(d){return d.r})
+		.attr("stroke",function(d){return d.color;})
+		.attr("stroke-opacity",0.5);
 
 	//------------------------------- Transition exiting nodes ----------------------------//
 	var nodeExit = node.exit().transition()
-.duration(duration)
-	.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
-	.remove();
+		.duration(duration)
+		.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+		.remove();
 
 	nodeExit.select("image")
-	.attr("visibility","hidden");
+		.attr("visibility","hidden");
 
 	nodeExit.select("circle.imageBorder")
-	.attr("stroke-opacity",1e-6)
-	.attr("r", 1e-6);
+		.attr("stroke-opacity",1e-6)
+		.attr("r", 1e-6);
 
 	nodeExit.select("text")
-	.style("fill-opacity", 1e-6);
+		.style("fill-opacity", 1e-6);
 	//-------------------------- Update the links ------------------------------//
 	var link = vis.selectAll("path.link")
-	.data(tree.links(nodes));
+		.data(tree.links(nodes));
 
 	// Initialize new links to the center.
 	link.enter().insert("svg:path", "g")
-	.attr("class", "link")
-	.attr("transform", function(d) { return "rotate("+(-90)+")"; })
-	.transition()
-.duration(duration)
-	.attr("d", function(d) {
-		var o = {x: centerX, y: centerY};
-		return diagonal({source: o, target: o});
-	});
+		.attr("class", "link")
+		.attr("transform", function(d) { return "rotate("+(-90)+")"; })
+		.transition()
+		.duration(duration)
+		.attr("d", function(d) {
+			var o = {x: centerX, y: centerY};
+			return diagonal({source: o, target: o});
+		});
 
-// Transition links to their new position.
-link.attr("transform", function(d) { return "rotate("+(-90)+")"; })
-	.transition()
-.duration(duration)
-	.attr("d", diagonal);
+	// Transition links to their new position.
+	link.attr("transform", function(d) { return "rotate("+(-90)+")"; })
+		.transition()
+		.duration(duration)
+		.attr("d", diagonal);
 
 	// Transition exiting nodes to the center.
 	link.exit().transition()
-.duration(duration)
-	.attr("d", function(d) {
-		var o = {x: centerX, y: centerY};
-		return diagonal({source: o, target: o});
-	})
-.remove();
+		.duration(duration)
+		.attr("d", function(d) {
+			var o = {x: centerX, y: centerY};
+			return diagonal({source: o, target: o});
+		})
+	.remove();
+
+	var relationship = vis.selectAll("g.relationship")
+		.data(tree.links(nodes));
+
+	var relationshipEnter = relationship.enter().append("svg:g")
+		.attr("class","relationship")
+		.attr("transform", function(d) { return "rotate(" + (-90) + ")" }); 
+
+	var pathDefs = relationshipEnter.append("svg:defs");
+	pathDefs.append("svg:path")
+		.attr("id", function(d,i){	
+			d.relationpath = "relationpath"+d.target.id;
+			return d.relationpath;	})
+		.attr("d",diagonal);
+
+	relationshipEnter.append("text")
+		//	.attr("text-anchor","end")
+		.attr("text-anchor", function(d) { return (d.target.x > 90)&&(d.target.x < 270) ? "end" : "start"; })
+		.attr("x",function(d){ return -d.target.r-5; })
+		.attr("dy", ".31em")
+		.attr("stroke-width",1)
+		.style("font-size", "12px")
+		.attr("fill-opacity","1e-6")
+		.attr("fill",function(d){ return d.target.color; })
+		.append("textPath")
+		.attr("xlink:href", function(d){ return "#"+d.relationpath; })
+		.attr("startOffset","100%")
+		.text( function(d){ return d.target.name; })
+		.attr("transform", function(d) {
+			return (d.target.x < 90)&&(d.target.x > 270) ? null : "rotate(180)"; })
+
+	relationship.selectAll("text")
+		.transition()
+		.duration(duration)
+		.attr("fill-opacity","1");
+
+	relationship.exit().selectAll("text")
+		.transition()
+		.duration(duration)
+		.attr("fill-opacity","1e-6");
+	relationship.exit().remove();
 
 }
 

@@ -86,6 +86,43 @@ function update(source) {
 		d.x0 = d.x;
 		d.y0 = d.y;
 	});
+
+	var relationship = vis.selectAll("g.relationship")
+		.data(tree.links(nodes));
+
+	var relationEnter = relationship.enter().append("svg:g")
+		.attr("class","relationship")
+
+	var pathDefs = relationship.append("svg:defs");
+	pathDefs.append("svg:path")
+		.attr("id", function(d,i){	
+			d.relationpath = "relationpath"+d.target.id;
+			return d.relationpath;	})
+	//	.attr("transform",function(d){ return "translate("+d.target.y+","+d.target.x+")";})
+		.attr("d",diagonal);
+
+	relationEnter.append("text")
+		.attr("text-anchor","end")
+		.attr("dy", ".31em")
+		.attr("stroke-width",1)
+		.style("font-size", "12px")
+		.attr("fill","red")
+	//	.attr("fill-opacity","1e-6")
+		.append("textPath")
+		.attr("xlink:href", function(d){ return "#"+d.relationpath; })
+		.attr("startOffset","100%")
+		.text( function(d){ return d.target.name; })
+
+	relationship.selectAll("text")
+		.transition()
+		.duration(duration)
+		.attr("fill-opacity","1");
+
+	relationship.exit().selectAll("text")
+		.transition()
+		.duration(duration)
+		.attr("fill-opacity","1e-6");
+	relationship.exit().remove();
 }
 
 // Toggle children.

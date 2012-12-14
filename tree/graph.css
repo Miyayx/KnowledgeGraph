@@ -1,7 +1,11 @@
 
+/*	body {background-color:#F5F5DC}*/
+body{ background-color:aliceblue }
+
+
 .infobox {
-font-size: 15px;
-text-anchor: middle
+	font-size: 15px;
+	text-anchor: middle
 }
 .infobox rect.background{
 	stroke-opacity: 0.5;
@@ -11,4 +15,24 @@ text-anchor: middle
 
 .infobox rect.label{
 	fill-opacity:0.5
+}
+
+text {
+	font-family:"Arial";
+	font-weight:bold
+}
+
+
+
+.link {
+	fill: none;
+	stroke: #ccc;
+	stroke-width: 3px;
+}
+
+.imageBorder{
+	stroke-width:4px;
+	fill:white;
+	fill-opacity:0;
+	cursor:pointer
 }

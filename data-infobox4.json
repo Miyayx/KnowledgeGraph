@@ -1,0 +1,120 @@
+{
+	"name" : "阿甘正传",
+		"imageurl" : "http://a0.att.hudong.com/42/88/20300001066597134562883195081_140.jpg",
+		"infobox":[
+		{"label":"中文名","context":"阿甘正传"},
+		{"label":"其它译名","context":"福雷斯特·冈普"},
+		{"label":"对白语言","context":"英语"},
+		{"label":"片长","context":"142 min"},
+		{"label":"上映时间","context":"1994年"},
+		{"label":"出品时间","context":"1993年"}
+	],
+
+		"categories" : [{
+			"category" : "人物",
+			"children" : [ {
+				"name" : "罗伯特·泽米吉斯",
+				"size" : 1082,
+				"imageurl" : "http://a4.att.hudong.com/26/77/01300000906381128503773622280_s.jpg"
+			},{
+				"name" : "艾瑞克·罗斯",
+				"size" : 1082,
+				"imageurl" : "http://a0.att.hudong.com/16/68/01300000633919128503686864741_140.jpg"
+			},{
+				"name" : "汤姆·汉克斯",
+				"size" : 1082,
+				"imageurl" : "http://a2.att.hudong.com/47/81/01300000329092124715813393932_140.jpg"
+			},{
+				"name" : "温斯顿·格鲁姆",
+				"size" : 1082,
+				"imageurl" : "http://a4.att.hudong.com/27/09/01300000733232128504095900012_140.jpg"
+			},{
+				"undirected" : [{
+					"name" : "埃尔维斯·普雷斯利",
+					"size" : 3534,
+					"imageurl" : "http://a4.att.hudong.com/56/37/20300000362281134628375272387_140.jpg"
+				}, {
+					"name" : "罗伯特·肯尼迪",
+						"size" : 5731,
+						"imageurl" : "http://a4.att.hudong.com/51/23/01300000393679124291235900726_140.jpg"
+				},{
+					"name" : "理查德·尼克松",
+						"size" : 7840,
+						"imageurl" : "http://a1.att.hudong.com/10/26/20300000362281132316262368115_140.jpg"
+				}]
+			}
+			]
+		},
+				{
+			"category" : "组织机构",
+			"children" : [ {
+				"undirected" : [{
+					"name" : "美国众议院",
+					"size" : 1681,
+					"imageurl" : "http://a1.att.hudong.com/17/61/01300000164456121634614323078_140.jpg"
+				}, {
+					"name" : "派拉蒙影业公司",
+					"size" : 2105,
+					"imageurl" : "http://a4.att.hudong.com/76/38/01300000350658124608388640763_140.jpg"
+				}, {
+					"name" : "共和党",
+					"size" : 1316,
+					"imageurl" : "http://a2.att.hudong.com/07/22/01300000359580124832226171872_140.jpg"
+				}]
+			}
+			]
+		},
+				{
+			"category" : "电影",
+			"children" : [{
+				"undirected" : [{
+					"name" : "肖申克的救赎",
+					"size" : 6703,
+					"imageurl" : "http://a2.att.hudong.com/38/58/01300000763167127820580036457_140.jpg"
+				}, {
+					"name" : "勇敢的心",
+					"size" : 2138,
+					"imageurl" : "http://a1.att.hudong.com/56/34/20300023477105132205340103342_140.jpg"
+				}, {
+					"name" : "这个杀手不太冷",
+					"size" : 3824,
+					"imageurl" : "http://a0.att.hudong.com/83/37/01300000560404127954378818234_140.jpg"
+				}, {
+					"name" : "当幸福来敲门",
+					"size" : 1353,
+					"imageurl" : "http://a0.att.hudong.com/11/64/01300000242726125100648119785_140.jpg"
+				}]
+			}
+			]
+		},
+	
+
+	{
+			"category" : "地理",
+			"children" : [{
+				"name" : "美国",
+				"size" : 3938,
+				"imageurl" : "http://a1.att.hudong.com/54/29/20300001153736130188297444033_140.jpg"
+			}, {
+				"undirected" : [{
+					"name" : "亚特兰大",
+					"size" : 5731,
+					"imageurl" : "http://a1.att.hudong.com/52/60/01300000040940120495604417158_140.jpg"
+				},{
+					"name" : "澳大利亚",
+					"size" : 5731,
+					"imageurl" : "http://a3.att.hudong.com/02/16/01300000224159123719160118470_140.jpg"
+				},{
+					"name" : "越南",
+					"size" : 5731,
+					"imageurl" : "http://a1.att.hudong.com/17/31/01300000164151122235311266545_140.jpg"
+				},{
+					"name" : "德国",
+					"size" : 5731,
+					"imageurl" : "http://a3.att.hudong.com/17/67/01300000201721123659677193126_140.jpg"
+				}]
+			}
+			]
+		}
+		]
+}

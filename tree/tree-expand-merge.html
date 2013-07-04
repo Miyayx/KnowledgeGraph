@@ -8,15 +8,49 @@
 		<![endif]-->    
 		<script type="text/javascript" src="../../d3.v2.js"></script>
 		<script type="text/javascript" src="../../jquery-1.6.1.min.js"></script>
+		<script type="text/javascript" src="../../tinybox.js"></script>
 
 		<link type="text/css" rel="stylesheet" href="graph.css"/>
+		<link type="text/css" rel="stylesheet" href="infobox.css"/>
 
 	</head>
 	<body>
 		<div id="chart" backgroud-color="black"></div>
 		<div id="infobox"></div>
 		<script type="text/javascript" src="tree-radial-merge.js"></script>
-		<script type="text/javascript" src="infobox-bubble.js"></script>
 		<script type="text/javascript" src="tree-expand-merge.js"></script>
-	</body>
-</html>
+		<script>
+			function renderInfobox(source){
+				var _leftheight = $(".left").height();
+				_rightheight = $(".right").height();
+				if(_leftheight > _rightheight ) {
+					$(".right").height(_leftheight);
+				}
+				else {
+					$(".left").height(_rightheight);
+				}
+
+				$('p.infobox-title').css('color',source.color);
+				$('tr').css("color",source.color);
+				$('table tr').each(function() {  
+					$(this).find("td:first")
+					.css("background-color",source.color)
+					.css("color","white");
+				});
+				var _img=$('img');
+				if(_rightheight > _img.height())
+				{  
+					_img.css("width","92%");   
+					var c=((_rightheight-_img.height())/2); 
+					_img.css({"margin-top":c+"px"});
+				}  
+				else  
+				{  
+					_img.css({"height":"100%","margin":"0 auto"});  
+
+				}
+				_img.css("solid",source.color);
+			}
+			</script>
+		</body>
+	</html>

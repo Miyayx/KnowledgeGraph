@@ -1,0 +1,20 @@
+body {font:12px/1.4 Verdana,Arial; background:#eee; height:100%; margin:25px 0; padding:0}
+p {margin:0 0 0 0px}
+
+.tbox {position:absolute; display:none; padding:14px 17px; z-index:900;-moz-border-radius:5px; border-radius:5px; }
+.tinner {padding:15px; -moz-border-radius:5px; border-radius:5px; background:#fff url(preload.gif) no-repeat 50% 50%; border-right:1px solid #333; border-bottom:1px solid #333}
+.tmask {position:absolute; display:none; top:0px; left:0px; height:100%; width:100%; background:#000; z-index:800}
+.tclose {position:absolute; top:0px; right:0px; width:30px; height:30px; cursor:pointer; background:url(close.png) no-repeat}
+.tclose:hover {background-position:0 -30px}
+.tcontent {background:#fff}
+.infobox-title{padding-left:10px; font-size:22px; font-weight:bold }
+#infobox {padding:0}
+#infobox .left{ float:left;  background:#fff;}
+#infobox img{ 
+	 float:left;vertical-align:middle;
+	display:block; position:relative;
+	padding:3px;border:3px;
+ }
+ #infobox .right{ float:right;	background:#fff;padding:0 0px }
+ #infobox table{ border:0px; margin-top:0px; font-size:18px;text-align:center;border-spacing:3px }
+ #infobox table tbody tr {margin-bottom:2px; color:white }

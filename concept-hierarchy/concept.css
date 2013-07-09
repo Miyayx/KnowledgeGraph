@@ -1,0 +1,40 @@
+.node rect{
+stroke:#ccc;
+stroke-width:3px;
+opacity:0.8;
+}
+
+.node text {
+fill:white;
+font: 25px sans-serif;
+}
+
+.center-node + text{
+font:30px sans-serif;
+}
+
+.node .center-node{
+fill:#8e44ad;
+}
+
+.node .super-node{
+fill:#16a085;
+}
+
+.node .sub-node{
+fill:#f39c12;
+}
+
+.super-link {
+fill: none;
+stroke: #ccc;
+stroke-width: 3px;
+}
+
+.sub-link {
+fill: none;
+stroke: #ccc;
+stroke-width: 3px;
+}
+
+

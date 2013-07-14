@@ -3,3 +3,6 @@
 *.js~
 *.html~
 *.gitignore~
+*.rar
+*.zip
+*.bak

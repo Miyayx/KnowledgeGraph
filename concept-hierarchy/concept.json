@@ -2,7 +2,8 @@
         "name":"AAA",
                 "super":[
                 {
-                        "name":"bbbbbb"
+                        "name":"BBBB"
+
                 },
                 {
                         "name":"cccc"
@@ -13,12 +14,9 @@
                 {
                         "name":"eeee"
                 },
-		{
-		"name":"ffffff"
-		},
-				{
-		"name":"gg"
-		}
+                {
+                        "name":"ffffff"
+                }
         ],
                 "sub":[
                 {
